@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Moon, Sun } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface Message {
@@ -15,6 +16,11 @@ export const ChatBox = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
+    const [theme, setTheme] = useState('dark'); // Initial theme set to 'light'
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    };
 
     const bottomRef = useRef<HTMLDivElement | null>(null);
 
@@ -22,6 +28,9 @@ export const ChatBox = () => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
+    useEffect(() => {
+        document.body.className = theme; // Apply the theme to the body element
+    }, [theme]);
 
     const sendMessage = async () => {
         if (!input.trim()) return;
@@ -48,9 +57,17 @@ export const ChatBox = () => {
 
     return (
         <>
-            <Card className="w-xl sm-[w-full]">
-                <CardHeader className="text-center">
-                    <h1>AIVA (AI Virtual Assitant)</h1>
+            <Card className="w-xl sm-[w-full] p-0 pb-6">
+                <CardHeader className="text-center p-2 bg-muted">
+                    <div className="flex flex-row justify-between items-center">
+                        <h1 className="m-0">AIVA (AI Virtual Assitant)</h1>
+                        <div>
+                            <button onClick={toggleTheme} className="ml-4 p-2 rounded">
+                                {theme === 'light' ? <Moon className="h-[1.2rem] w-[1.2rem] rotate-90 transition-all dark:scale-100 dark:rotate-0" /> : <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all light:scale-0 light:-rotate-90" />
+                                }
+                            </button>
+                        </div>
+                    </div>
                 </CardHeader>
                 <CardContent className="overflow-hidden flex-1">
                     <ScrollArea className="h-[60vh] pr-4 space-y-2">
@@ -60,7 +77,7 @@ export const ChatBox = () => {
                                     key={i}
                                     className={`rounded-xl mb-2 px-4 py-2 text-sm whitespace-pre-line max-w-[75%] ${msg.role === "user"
                                         ? "ml-auto bg-blue-500 text-white"
-                                        : "mr-auto bg-muted text-muted-foreground"
+                                        : "mr-auto bg-muted text-white"
                                         }`}
                                 >
                                     {msg.content}

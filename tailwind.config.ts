@@ -1,4 +1,5 @@
 const config = {
+    darkMode: 'class',
     content: [
         "./app/**/*.{ts,tsx}",
         "./pages/**/*.{ts,tsx}",
