@@ -12,7 +12,11 @@ interface Message {
     content: string
 }
 
-export default function ChatBox(onSubmitFirstMessage: any) {
+interface ChatBoxProps {
+    onSubmitFirstMessage: () => void
+}
+
+export function ChatBox({ onSubmitFirstMessage }: ChatBoxProps) {
     const [input, setInput] = useState("")
     const [messages, setMessages] = useState<Message[]>([])
     const [loading, setLoading] = useState(false)
@@ -72,28 +76,28 @@ export default function ChatBox(onSubmitFirstMessage: any) {
                     <Button variant="ghost" size="icon" onClick={toggleTheme}>
                         {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
                     </Button>
-                    </div>
-                </CardHeader>
+                </div>
+            </CardHeader>
 
             {submitted && (
                 <ScrollArea className={`px-4  flex-1 overflow-y-auto transition-all duration-300 mb-[80px]`}>
                     <div className="flex flex-col gap-3">
-                            {messages.map((msg, i) => (
-                                <div
-                                    key={i}
-                                    className={`rounded-xl px-4 py-2 text-sm max-w-[75%] whitespace-pre-line ${msg.role === "user"
-                                        ? "ml-auto bg-blue-500 text-white"
-                                        : "mr-auto bg-muted text-black dark:text-white"
-                                        }`}
-                                >
-                                    {msg.content}
-                                </div>
-                            ))}
-                            {loading && (
+                        {messages.map((msg, i) => (
+                            <div
+                                key={i}
+                                className={`rounded-xl px-4 py-2 text-sm max-w-[75%] whitespace-pre-line ${msg.role === "user"
+                                    ? "ml-auto bg-blue-500 text-white"
+                                    : "mr-auto bg-muted text-black dark:text-white"
+                                    }`}
+                            >
+                                {msg.content}
+                            </div>
+                        ))}
+                        {loading && (
                             <div className="text-sm italic text-muted-foreground">Assistant is typing...</div>
-                            )}
-                            <div ref={bottomRef} />
-                        </div>
+                        )}
+                        <div ref={bottomRef} />
+                    </div>
                 </ScrollArea>
             )}
 
@@ -113,7 +117,7 @@ export default function ChatBox(onSubmitFirstMessage: any) {
                                     sendMessage()
                                 }
                             }}
-                            className="flex-1 resize-none min-h-[10px] max-h-20 pr-16" 
+                            className="flex-1 resize-none min-h-[10px] max-h-20 pr-16"
                         />
                         <div
                             className={`absolute flex align-items-end bottom-0 right-2 h-8 px-3 text-sm ${input.trim() ? `block` : `hidden`}`}
@@ -125,7 +129,7 @@ export default function ChatBox(onSubmitFirstMessage: any) {
                     </div>
                 </div>
 
-                </CardFooter>
+            </CardFooter>
         </Card>
     )
 }
