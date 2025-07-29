@@ -1,10 +1,17 @@
-import Image from "next/image";
-import { ChatBox } from "./chatbox/page";
+'use client'
+
+import { useState } from "react"
+import { ChatBox } from "./chatbox/page"
 
 export default function Home() {
+  const [submitted, setSubmitted] = useState(false)
+
   return (
-    <div className="font-sans flex items-center justify-center min-h-screen w-full">
-      <ChatBox />
+    <div
+      className={`w-full min-h-screen font-sans ${submitted ? "flex flex-col justify-end" : "flex items-center justify-center"
+        }`}
+    >
+      <ChatBox onSubmitFirstMessage={() => setSubmitted(true)} />
     </div>
-  );
+  )
 }
