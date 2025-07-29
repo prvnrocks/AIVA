@@ -12,11 +12,7 @@ interface Message {
     content: string
 }
 
-interface ChatBoxProps {
-    onSubmitFirstMessage: () => void
-}
-
-export default function ChatBox({ onSubmitFirstMessage }: ChatBoxProps) {
+export default function ChatBox(onSubmitFirstMessage: any) {
     const [input, setInput] = useState("")
     const [messages, setMessages] = useState<Message[]>([])
     const [loading, setLoading] = useState(false)
