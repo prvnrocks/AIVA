@@ -16,7 +16,7 @@ interface ChatBoxProps {
     onSubmitFirstMessage: () => void
 }
 
-export const ChatBox = ({ onSubmitFirstMessage }: ChatBoxProps) => {
+export default function ChatBox({ onSubmitFirstMessage }: ChatBoxProps) {
     const [input, setInput] = useState("")
     const [messages, setMessages] = useState<Message[]>([])
     const [loading, setLoading] = useState(false)

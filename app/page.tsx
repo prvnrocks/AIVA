@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from "react"
-import { ChatBox } from "./chatbox/page"
+import ChatBox from "./chatbox/page"
+
 
 export default function Home() {
   const [submitted, setSubmitted] = useState(false)
