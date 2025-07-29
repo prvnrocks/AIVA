@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardFooter, CardHeader } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Textarea } from "@/components/ui/textarea"
 import { Moon, Sun, Send } from "lucide-react"
@@ -80,7 +80,6 @@ export const ChatBox = ({ onSubmitFirstMessage }: ChatBoxProps) => {
                 </CardHeader>
 
             {submitted && (
-                // <CardContent className="pb-28">
                 <ScrollArea className={`px-4  flex-1 overflow-y-auto transition-all duration-300 mb-[80px]`}>
                     <div className="flex flex-col gap-3">
                             {messages.map((msg, i) => (
@@ -99,8 +98,7 @@ export const ChatBox = ({ onSubmitFirstMessage }: ChatBoxProps) => {
                             )}
                             <div ref={bottomRef} />
                         </div>
-                    </ScrollArea>
-                // </CardContent>
+                </ScrollArea>
             )}
 
             <CardFooter
@@ -119,7 +117,7 @@ export const ChatBox = ({ onSubmitFirstMessage }: ChatBoxProps) => {
                                     sendMessage()
                                 }
                             }}
-                            className="flex-1 resize-none min-h-[10px] max-h-20 pr-16" // add padding right for the button space
+                            className="flex-1 resize-none min-h-[10px] max-h-20 pr-16" 
                         />
                         <div
                             className={`absolute flex align-items-end bottom-0 right-2 h-8 px-3 text-sm ${input.trim() ? `block` : `hidden`}`}
@@ -128,12 +126,6 @@ export const ChatBox = ({ onSubmitFirstMessage }: ChatBoxProps) => {
                                 onClick={sendMessage} />
 
                         </div>
-                        {/* <Button
-                            type="button"
-                            onClick={sendMessage}
-                            // disabled={!input.trim() || loading}
-                        >
-                        </Button> */}
                     </div>
                 </div>
 

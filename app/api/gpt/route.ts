@@ -7,7 +7,6 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: NextRequest) {
-    console.log("test");
     try {
         const body = await req.json();
         const { messages } = body;
